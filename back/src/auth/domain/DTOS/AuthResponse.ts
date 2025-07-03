@@ -1,5 +1,7 @@
+// auth/domain/DTOS/AuthResponse.ts
 export default interface AuthResponse {
-  id: string
+  id: string;
+  imageUrl?: string;
   name: string;
   email: string;
   token?: string;

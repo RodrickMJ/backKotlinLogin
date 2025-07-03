@@ -16,6 +16,7 @@ export default class FindUserByPkUseCase {
 
     return {
         id: user.id,
+        imageUrl: user.imageUrl,
         name: user.name,
         email: user.email,
         rol: user.rol,

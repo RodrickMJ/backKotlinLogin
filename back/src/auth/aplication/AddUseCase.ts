@@ -1,3 +1,4 @@
+// auth/aplication/AddUseCase.ts
 import AuthRepository from "../domain/AuthRepository";
 import AuthRequest from "../domain/DTOS/AuthRequest";
 import AuthResponse from "../domain/DTOS/AuthResponse";
@@ -19,6 +20,7 @@ export default class AddUseCase {
 
         const response: AuthResponse = {
             id: result.id,
+            imageUrl: result.imageUrl,
             name: result.name,
             email: result.email,
             rol: result.rol,

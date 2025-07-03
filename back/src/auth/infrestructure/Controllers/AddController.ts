@@ -1,3 +1,4 @@
+// auth/infrestructure/AddController.ts
 import { Request, Response } from "express";
 import AddUseCase from "../../aplication/AddUseCase";
 import AuthRequest from "../../domain/DTOS/AuthRequest";

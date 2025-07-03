@@ -1,3 +1,4 @@
+// auth/infrestructure/Routers/authRouter.ts
 import { Router } from "express";
 import {
     accessController,
@@ -10,8 +11,9 @@ import {
     updateByPkController,
     deleteController
 } from "../Dependencies";
+import multer from "multer";
 
-
+const upload = multer({ storage: multer.memoryStorage() });
 const router = Router();
 
 router.post(
@@ -27,7 +29,7 @@ router.get('/:id',
     findUserByPkController.run.bind(findUserByPkController));
 
 router.patch('/:id',
-    authMiddleware.run.bind(authMiddleware),
+    authMiddleware.run.bind(authMiddleware),upload.single("image"),
     updateByPkController.run.bind(updateByPkController));
 
 router.delete(

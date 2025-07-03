@@ -1,5 +1,7 @@
+// auth/domain/Auth.ts
 export default interface Auth {
-    id: string
+    id: string,
+    imageUrl?: string,
     name: string,
     email: string,
     password: string

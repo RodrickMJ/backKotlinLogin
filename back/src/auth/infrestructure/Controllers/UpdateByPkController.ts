@@ -1,12 +1,18 @@
+// auth/infrastructure/controllers/UpdateByPkController.ts
 import UpdateByPkUseCase from "../../aplication/UpdateByPkUseCase";
 import { Request, Response } from "express";
+import S3ImageUploader from "../storage/S3ImageUploader";
 
 export default class UpdateByPkController {
-  constructor(readonly updateByPkUseCase: UpdateByPkUseCase) {}
+  constructor(
+    readonly updateByPkUseCase: UpdateByPkUseCase,
+    readonly imageUploader: S3ImageUploader // lo inyectas en Dependencies.ts
+  ) { }
 
   async run(req: Request, res: Response) {
     const { id } = req.params;
     const data = req.body;
+    const file = req.file;
 
     if (!id) {
       return res.status(400).json({
@@ -35,6 +41,18 @@ export default class UpdateByPkController {
     }
 
     try {
+      // 👇 subir imagen si viene
+      if (file) {
+        const imageUrl = await this.imageUploader.upload(
+          file.buffer,
+          file.originalname,
+          file.mimetype,
+          id
+        );
+
+        data.imageUrl = imageUrl;
+      }
+
       const result = await this.updateByPkUseCase.run(id, data);
 
       if (!result) {

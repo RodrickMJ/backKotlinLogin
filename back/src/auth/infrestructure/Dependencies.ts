@@ -1,3 +1,4 @@
+// auth/infrestructure/Dependencies.ts
 import AccessUseCase from "../aplication/AccessUseCase";
 import UserMongoRepository from "./UserMongoRepository";
 import AccessController from "./Controllers/AccessControllers";
@@ -21,6 +22,7 @@ import UpdateByPkController from "./Controllers/UpdateByPkController";
 import UpdateByPkUseCase from "../aplication/UpdateByPkUseCase";
 import DeleteUseCase from "../aplication/DeleteByPkUseCase";
 import DeleteController from "./Controllers/DeleteController";
+import S3ImageUploader from "./storage/S3ImageUploader";
 
 const userMongoRepository = new UserMongoRepository(UserModel);
 const encryptService = new EncriptService()
@@ -42,11 +44,12 @@ const findUserForPasswordResetUseCase = new FindUserForPasswordResetUseCase(
     tokenService,
     userMongoRepository
 );
+const s3Uploader = new S3ImageUploader();
 
 export const authMiddleware = new AuthMiddleware(tokenService);
 
 export const deleteController = new DeleteController(deleteUseCase);
-export const updateByPkController = new UpdateByPkController(updateBypkUseCase)
+export const updateByPkController = new UpdateByPkController(updateBypkUseCase,s3Uploader)
 export const findUserByPkController = new FindUserByPkController(findUserByPkUseCase);
 export const accessController = new AccessController(accessUseCase);
 export const addController = new AddController(addUseCase);

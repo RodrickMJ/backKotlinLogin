@@ -1,3 +1,4 @@
+// auth/infrestructure/AuthRepository.ts
 import AuthRequest from "../domain/DTOS/AuthRequest";
 import Auth from "../domain/Auth";
 import AuthRepository from "../domain/AuthRepository";
@@ -21,6 +22,7 @@ export default class UserMongoRepository implements AuthRepository {
 
             const newUser = await this.model.create({
                 name: auth.name,
+                imageUrl: '',
                 email: auth.email,
                 password: auth.password,
                 rol: 'Administrador'
@@ -92,6 +94,7 @@ export default class UserMongoRepository implements AuthRepository {
 
             return {
                 id: user.id,
+                imageUrl: user.imageUrl,
                 name: user.name,
                 email: user.email,
                 password: user.email,
@@ -114,6 +117,7 @@ export default class UserMongoRepository implements AuthRepository {
 
             return {
                 id: updated.id,
+                imageUrl: updated.imageUrl,
                 name: updated.name,
                 email: updated.email,
                 password: updated.password,

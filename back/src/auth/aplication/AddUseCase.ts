@@ -23,6 +23,8 @@ export default class AddUseCase {
             imageUrl: result.imageUrl,
             name: result.name,
             email: result.email,
+            phone: result.phone,
+            description: result.description,
             rol: result.rol,
             token: this.tokenService.generateToken(result.id)
         }

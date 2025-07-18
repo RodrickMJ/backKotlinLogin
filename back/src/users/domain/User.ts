@@ -1,14 +1,11 @@
 
-export default interface UserInterface {
+export default interface IUser {
     id: string
-    imageUrl?: string;
     name: string,
     email: string,
-    phone?: string,
-    description?: string,
     password: string
     rol: 'Administrador' | 'Investigador'
     passwordResetCode?: string,
     passwordResetExpires?: Date
-
+  
 }

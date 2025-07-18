@@ -21,6 +21,14 @@ const UserSchema = new Schema<userDocument>({
         required: true,
         unique: true
     },
+    phone: {
+        type: String,
+        required: false
+    },
+    description: {
+        type: String,
+        required: false
+    },
     rol: {
         type: String,
         enum: ['Administrador', 'Investigador'],

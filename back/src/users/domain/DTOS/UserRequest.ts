@@ -1,8 +1,7 @@
-export default interface UserRequest{
+
+export default interface UserRequest {
     name: string,
-    apellidoPaterno: string,
-    apellidoMaterno: string,
-    telefono: string,
-    domicilio: string,
-    
+    email: string,
+    password: string
+    rol: string
 }

@@ -4,7 +4,9 @@ export default interface Auth {
     imageUrl?: string,
     name: string,
     email: string,
-    password: string
+    password: string,
+    phone?: string,
+    description?: string,
     rol: 'Administrador' | 'Investigador'
     passwordResetCode?: string,
     passwordResetExpires?: Date

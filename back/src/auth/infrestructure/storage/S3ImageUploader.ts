@@ -40,10 +40,10 @@ export default class S3ImageUploader {
 
     async upload(buffer: Buffer, originalName: string, mimeType: string, userId: string): Promise<string> {
         try {
-            console.log('🔧 Uploading image to S3...');
-            console.log('📍 Region:', process.env.AWS_REGION);
-            console.log('🪣 Bucket:', this.bucket);
-            console.log('🔑 Access Key:', process.env.AWS_ACCESS_KEY_ID?.substring(0, 10) + '...');
+            console.log(' Uploading image to S3...');
+            console.log('Region:', process.env.AWS_REGION);
+            console.log(' Bucket:', this.bucket);
+            console.log(' Access Key:', process.env.AWS_ACCESS_KEY_ID?.substring(0, 10) + '...');
             
             const key = `profile-images/${userId}/${uuidv4()}-${originalName}`;
             
@@ -59,13 +59,13 @@ export default class S3ImageUploader {
             
             const imageUrl = `https://${this.bucket}.s3.${process.env.AWS_REGION}.amazonaws.com/${key}`;
             
-            console.log('✅ Image uploaded successfully:', imageUrl);
-            console.log('📋 ETag:', result.ETag);
+            console.log('Image uploaded successfully:', imageUrl);
+            console.log(' ETag:', result.ETag);
             
             return imageUrl;
             
         } catch (error) {
-            console.error('❌ Error uploading image to S3:', error);
+            console.error('Error uploading image to S3:', error);
             
             if (error instanceof Error) {
                 // Errores comunes y sus soluciones
@@ -88,10 +88,10 @@ export default class S3ImageUploader {
             const { ListBucketsCommand } = await import("@aws-sdk/client-s3");
             const command = new ListBucketsCommand({});
             await this.s3.send(command);
-            console.log('✅ S3 connection successful');
+            console.log(' S3 connection successful');
             return true;
         } catch (error) {
-            console.error('❌ S3 connection failed:', error);
+            console.error('S3 connection failed:', error);
             return false;
         }
     }

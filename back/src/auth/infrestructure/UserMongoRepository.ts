@@ -25,6 +25,8 @@ export default class UserMongoRepository implements AuthRepository {
                 imageUrl: '',
                 email: auth.email,
                 password: auth.password,
+                phone: '',
+                description: '',
                 rol: 'Administrador'
             });
 
@@ -98,6 +100,8 @@ export default class UserMongoRepository implements AuthRepository {
                 name: user.name,
                 email: user.email,
                 password: user.email,
+                phone: user.phone,
+                description: user.description,
                 rol: user.rol,
                 passwordResetCode: user.passwordResetCode,
                 passwordResetExpires: user.passwordResetExpires
@@ -120,6 +124,8 @@ export default class UserMongoRepository implements AuthRepository {
                 imageUrl: updated.imageUrl,
                 name: updated.name,
                 email: updated.email,
+                phone: updated.phone,
+                description: updated.description,
                 password: updated.password,
                 rol: updated.rol
             }

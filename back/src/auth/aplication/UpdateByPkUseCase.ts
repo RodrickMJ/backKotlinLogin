@@ -17,6 +17,8 @@ export default class UpdateByPkUseCase {
             imageUrl: result.imageUrl,
             name: result.name,
             email: result.email,
+            phone: result.phone,
+            description: result.description,
             rol: result.rol
         }
 

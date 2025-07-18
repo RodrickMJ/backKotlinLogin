@@ -19,6 +19,8 @@ export default class FindUserByPkUseCase {
         imageUrl: user.imageUrl,
         name: user.name,
         email: user.email,
+        phone: user.phone,
+        description: user.description,
         rol: user.rol,
         // token: this.tokenService.generateToken(user.id)
     };

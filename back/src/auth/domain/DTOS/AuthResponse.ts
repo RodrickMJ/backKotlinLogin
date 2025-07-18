@@ -4,6 +4,8 @@ export default interface AuthResponse {
   imageUrl?: string;
   name: string;
   email: string;
+  phone?: string;
+  description?: string;
   token?: string;
   rol: 'Administrador' | 'Investigador'
 }

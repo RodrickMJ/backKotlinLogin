@@ -22,11 +22,11 @@ export default class UserMongoRepository implements AuthRepository {
 
             const newUser = await this.model.create({
                 name: auth.name,
-                imageUrl: '',
+                imageUrl: "https://kotlinimgs.s3.us-east-1.amazonaws.com/GvnJ1HxWsAAEzw7.jpg",
                 email: auth.email,
                 password: auth.password,
-                phone: '',
-                description: '',
+                phone: "(00) 0000-0000",
+                description: 'explica las características de un lugar, persona, animal, cosa o situación',
                 rol: 'Administrador'
             });
 

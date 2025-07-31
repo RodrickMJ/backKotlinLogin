@@ -1,9 +1,7 @@
-// domain/Cliente.ts
-
 export interface Payment {
     id: string;
     amount: number;
-    date: string; // o Date si prefieres usar tipo Date
+    date: string; // ISO string
     status: 'Completed' | 'Pending';
 }
 
@@ -15,13 +13,13 @@ export interface Loan {
     term: number;
     dailyPayment: number;
     totalToPay: number;
-    startDate: string; // o Date
-    endDate: string; // o Date
+    startDate: string;
+    endDate: string;
     status: 'Active' | 'Paid' | 'Overdue';
     payments: Payment[];
 }
 
-export interface IClient {
+export default interface IClient {
     id: string;
     name: string;
     email: string;

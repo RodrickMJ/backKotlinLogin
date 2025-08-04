@@ -45,7 +45,6 @@ export default class UpdateByPkController {
 
 
     try {
-      // 👇 subir imagen si viene
       if (file) {
         const imageUrl = await this.imageUploader.upload(
           file.buffer,

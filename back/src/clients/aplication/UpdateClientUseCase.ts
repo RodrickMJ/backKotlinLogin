@@ -4,24 +4,10 @@ import ClienteRepository from '../domain/ClienteRepository';
 import IClient from '../domain/Cliente';
 
 export default class UpdateClientUseCase {
-    constructor(readonly clientRepository: ClienteRepository) { }
+    constructor(readonly clientRepository: ClienteRepository) {}
 
     async run(id: string, clientRequest: ClienteRequest): Promise<ClienteResponse | null> {
-        const client = await this.clientRepository.getClientByPk(id);
-
-        if (!client) return null;
-
-        const updatedClient: IClient = {
-            ...client,
-            name: clientRequest.name || client.name,
-            email: clientRequest.email || client.email,
-            phone: clientRequest.phone || client.phone,
-            direccion: clientRequest.direccion || client.direccion,
-            imageUrl: clientRequest.imageUrl || client.imageUrl,
-            loans: client.loans,
-        };
-
-        const result = await this.clientRepository.addClient(updatedClient); // Reutilizamos addClient para actualizar
+        const result = await this.clientRepository.updateClient(id, clientRequest);
 
         if (!result) return null;
 

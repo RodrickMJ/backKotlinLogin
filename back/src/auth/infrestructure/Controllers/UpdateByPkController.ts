@@ -21,24 +21,28 @@ export default class UpdateByPkController {
       });
     }
 
-    if (!data || Object.keys(data).length === 0) {
+    if ((!data || Object.keys(data).length === 0) && !file) {
       return res.status(400).json({
         data: null,
-        msg: "At least one field is required to update.",
+        msg: "At least one field or an image is required to update.",
       });
     }
 
-    const allowedFields = ["name", "email", "password", "rol"];
-    const invalidFields = Object.keys(data).filter(
-      (key) => !allowedFields.includes(key)
-    );
 
-    if (invalidFields.length > 0) {
-      return res.status(400).json({
-        data: null,
-        msg: `Invalid fields: ${invalidFields.join(", ")}`,
-      });
+    if (data && Object.keys(data).length > 0) {
+      const allowedFields = ["name", "email", "password", "rol", "description", "phone"];
+      const invalidFields = Object.keys(data).filter(
+        (key) => !allowedFields.includes(key)
+      );
+
+      if (invalidFields.length > 0) {
+        return res.status(400).json({
+          data: null,
+          msg: `Invalid fields: ${invalidFields.join(", ")}`,
+        });
+      }
     }
+
 
     try {
       // 👇 subir imagen si viene

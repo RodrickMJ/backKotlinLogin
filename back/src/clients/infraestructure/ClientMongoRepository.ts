@@ -5,7 +5,7 @@ import ClientModel from '../../config/model/ModelClient';
 import { v4 as uuidv4 } from 'uuid';
 
 export default class ClientMongoRepository implements ClienteRepository {
-    constructor(readonly model: typeof ClientModel) { }
+    constructor(readonly model: typeof ClientModel) {}
 
     async addClient(clientRequest: ClienteRequest): Promise<IClient | null> {
         try {
@@ -79,6 +79,42 @@ export default class ClientMongoRepository implements ClienteRepository {
         } catch (error) {
             console.error('Error trying to delete client from database:', error);
             throw new Error(`Error deleting client with id: ${pk}.`);
+        }
+    }
+
+    async updateClient(id: string, clientRequest: ClienteRequest): Promise<IClient | null> {
+        try {
+            const existingClient = await this.model.findOne({ id });
+            if (!existingClient) return null;
+
+            // Verificar si el nuevo email y nombre ya existen en otro cliente
+            if (
+                (clientRequest.email !== existingClient.email || clientRequest.name !== existingClient.name) &&
+                (await this.findClient(clientRequest.name, clientRequest.email))
+            ) {
+                return null; // Conflicto: el nombre y email ya están registrados
+            }
+
+            const updatedClient = await this.model.findOneAndUpdate(
+                { id },
+                {
+                    $set: {
+                        name: clientRequest.name,
+                        email: clientRequest.email,
+                        phone: clientRequest.phone,
+                        direccion: clientRequest.direccion,
+                        imageUrl: clientRequest.imageUrl,
+                    },
+                },
+                { new: true } // Retorna el documento actualizado
+            );
+
+            if (!updatedClient) return null;
+
+            return updatedClient.toObject();
+        } catch (error) {
+            console.error('Error trying to update client in database:', error);
+            throw new Error(`Error updating client with id: ${id}.`);
         }
     }
 }
